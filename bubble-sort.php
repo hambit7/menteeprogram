@@ -1,5 +1,4 @@
 <?php
-ini_set("memory_limit","4096M");
 require_once 'helper.php';
 require_once 'data_source.php';
 
@@ -17,9 +16,14 @@ function bubbleSort(array $data)
             return bubbleSort($data);
         }
     }
-    return $data;
+    return  [
+        'data' => $data,
+        'dataCount' => count($data),
+        'iterationsCount' => $i + 1,
+        'type' => 'bubbleSort'
+    ];
 }
 
-$result = bubbleSort($inputData);
 
- dd($result);
+
+
