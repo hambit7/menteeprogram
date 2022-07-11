@@ -1,16 +1,13 @@
 <?php
-ini_set("memory_limit","4096M");
 require_once 'data_source.php';
 require_once 'helper.php';
 
 function partition(&$array, $left, $right) {
-//    $pivotIndex = floor($left + ($right - $left) / 2);
-    $pivotIndex = array_rand($array, 1);
-
+    $pivotIndex = floor($left + ($right - $left) / 2);
     $pivotValue = $array[$pivotIndex];
 
-    $i=$left;
-    $j=$right;
+    $i = $left;
+    $j = $right;
     while ($i <= $j) {
         while (($array[$i] < $pivotValue) ) {
             $i++;
@@ -29,14 +26,19 @@ function partition(&$array, $left, $right) {
     return $i;
 }
 
-function quicksort(&$array, $left, $right) {
+function quickSort(&$array, $left, $right) {
     if($left < $right) {
+        $_SESSION['iterationCounter']++;
         $pivotIndex = partition($array, $left, $right);
-        quicksort($array,$left,$pivotIndex - 1 );
+        quicksort($array,$left,$pivotIndex - 1);
         quicksort($array,$pivotIndex, $right);
     }
+    $result = [
+        'data' => $array,
+        'dataCount' => count($array),
+        'iterationsCount' => $_SESSION['iterationCounter'],
+        'type' => 'quickSort'
+
+    ];
+    return $result;
 }
-
- quicksort($inputData, 0, count($inputData) -1);
-
-dd($inputData);

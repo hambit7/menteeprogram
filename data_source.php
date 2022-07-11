@@ -1,17 +1,17 @@
 <?php
 
-$dataCount = 100;
-$min = 0;
-$max = 10;
-$count = 100;
+$minArrayValue = 0;
+$maxArrayValue = 10;
+$arraySize = 500;
+$equalNumber = 7;
 
-function dataGenerator($min , $max, $count) {
-    return array_map(function () use($min, $max) {
-        return rand($min, $max);
-    }, array_fill(0, $count, null));
+function dataGenerator($minArrayValue , $maxArrayValue, $arraySize) {
+    return array_map(function () use($minArrayValue, $maxArrayValue) {
+        return rand($minArrayValue, $maxArrayValue);
+    }, array_fill(0, $arraySize, null));
 };
 
-$inputArray = dataGenerator($min, $max, $count);
+$inputArray = dataGenerator($minArrayValue, $maxArrayValue, $arraySize);
 
 $inputData = [
     'Simple array' =>
@@ -21,5 +21,5 @@ $inputData = [
     'Random array' => $inputArray,
     'Random sorted array' =>call_user_func(function(array $a){sort($a);return $a;}, $inputArray),
     'Random sorted array DESC' =>call_user_func(function(array $a){rsort($a);return $a;}, $inputArray),
-    'Array with equal values' => dataGenerator(7, 7, $count)
+    'Array with equal values' => dataGenerator($equalNumber, $equalNumber, $arraySize)
 ];
