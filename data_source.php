@@ -2,7 +2,8 @@
 
 $minArrayValue = 0;
 $maxArrayValue = 10;
-$arraySize = 500;
+$maxArrayValue = 10000;
+$arraySize = 100;
 $equalNumber = 7;
 
 function dataGenerator($minArrayValue , $maxArrayValue, $arraySize) {
