@@ -2,7 +2,7 @@
 require_once 'data_source.php';
 require_once 'helper.php';
 
-function partition(&$array, $left, $right) {
+function partition(&$array, $left, $right, &$iterations) {
     $pivotIndex = floor($left + ($right - $left) / 2);
     $pivotValue = $array[$pivotIndex];
 
@@ -16,6 +16,7 @@ function partition(&$array, $left, $right) {
             $j--;
         }
         if ($i <= $j ) {
+            $iterations++;
             $temp = $array[$i];
             $array[$i] = $array[$j];
             $array[$j] = $temp;
@@ -26,17 +27,20 @@ function partition(&$array, $left, $right) {
     return $i;
 }
 
-function quickSort(&$array, $left, $right) {
+function quickSort(&$array, $left, $right, $reset = false) {
+    static $iterations = 0;
+    if($reset) {
+        $iterations = 0;
+    }
     if($left < $right) {
-        $_SESSION['iterationCounter']++;
-        $pivotIndex = partition($array, $left, $right);
+        $pivotIndex = partition($array, $left, $right, $iterations);
         quicksort($array,$left,$pivotIndex - 1);
         quicksort($array,$pivotIndex, $right);
     }
     $result = [
         'data' => $array,
         'dataCount' => count($array),
-        'iterationsCount' => $_SESSION['iterationCounter'],
+        'iterationsCount' => $iterations,
         'type' => 'quickSort'
 
     ];

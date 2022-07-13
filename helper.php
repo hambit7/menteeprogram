@@ -12,8 +12,7 @@ function prettyPrint(array $inputData, $functionName , $left = false, $right = f
     echo nl2br("Start.....\n");
     echo ("<hr>");
     foreach ($inputData as $name => $data) {
-        $_SESSION['iterationCounter'] = 0;
-        $result = $functionName($data, $left, $right);
+        $result = $functionName($data, 0,count($data)-1 , true);
 
         echo nl2br("Type of algoritm is : {$result['type']};\n");
         echo nl2br("Name of input array is : {$name};\n");
@@ -23,7 +22,6 @@ function prettyPrint(array $inputData, $functionName , $left = false, $right = f
     }
     echo nl2br("end\n");
     echo "<br>";
-    return;
 }
 
 
