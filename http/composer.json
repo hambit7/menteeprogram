@@ -1,0 +1,19 @@
+{
+    "require": {
+        "symfony/http-foundation": "^5.4",
+        "guzzlehttp/guzzle": "^7.4",
+        "vlucas/phpdotenv": "^5.4",
+        "predis/predis": "^2.0",
+        "monolog/monolog": "^2.8",
+        "psr/container": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Oxford\\": "http/"
+        },
+        "classmap": ["app","API", "External"],
+        "files": [
+            "../helper.php"
+        ]
+    }
+}
