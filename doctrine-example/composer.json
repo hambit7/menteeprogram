@@ -1,0 +1,20 @@
+{
+    "require": {
+        "symfony/http-foundation": "^5.4",
+        "vlucas/phpdotenv": "^5.4",
+        "doctrine/orm": "^2.11.0",
+        "doctrine/dbal": "^3.2",
+        "doctrine/annotations": "1.13.2",
+        "symfony/yaml": "^5.4",
+        "symfony/cache": "^5.4"
+
+    },
+    "autoload": {
+        "psr-4": {
+            "DoctrineExample\\": "doctrine-example/"
+        },
+        "files": [
+            "../helper.php"
+        ]
+    }
+}
