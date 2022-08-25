@@ -2,17 +2,19 @@
 
 namespace Oxford\API;
 
-use App\App;
-
-
 class OxfordDictionaryAPI
 {
     private string $word;
 
     protected string $method = 'GET';
 
-    public function __construct()
+    protected $clientService, $cacheService, $loggingService;
+
+    public function __construct($clientService, $cacheService, $loggingService)
     {
+        $this->clientService = $clientService;
+        $this->cacheService = $cacheService;
+        $this->loggingService = $loggingService;
         $this->word = $_ENV['OXFORD_APP_SEARCH_WORD'];
     }
 
@@ -21,9 +23,9 @@ class OxfordDictionaryAPI
         return $_ENV['OXFORD_APP_BASE_URL'] . '/' . $_ENV['OXFORD_APP_LANGUAGE'] . '/' . $_ENV['OXFORD_APP_SEARCH_WORD'];
     }
 
-    public function index()
+    public function index() : string
     {
-        if (!$responce = App::$container->get('CacheService')->get($this->word)) {
+        if (!$responce = $this->cacheService->get($this->word)) {
 
             $responce = $this->send($this->prepateApiUrl());
         }
@@ -33,7 +35,7 @@ class OxfordDictionaryAPI
     protected function send(string $url, string $logType = 'info', string $method = 'getBody'): string
     {
         try {
-            $answer = App::$container->get('ClientService')->request($this->method, $url);
+            $answer = $this->clientService->request($this->method, $url);
         } catch (\Exception $exeption) {
             $answer = $exeption;
             $logType = 'error';
@@ -41,8 +43,8 @@ class OxfordDictionaryAPI
         }
 
         $responce = $this->prepareAnswer($method, $answer);
-        App::$container->get('CacheService')->set($this->word, $responce);
-        App::$container->get('LoggingService')->$logType($responce);
+        $this->cacheService->set($this->word, $responce);
+        $this->loggingService->$logType($responce);
 
         return $responce;
     }
