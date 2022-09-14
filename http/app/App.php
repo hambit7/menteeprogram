@@ -2,15 +2,10 @@
 
 namespace App;
 
-use GuzzleHttp\Client;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 use Oxford\External\Container;
 use Oxford\External\Factory\CacheServiceFactory;
 use Oxford\External\Factory\ClientServiceFactory;
 use Oxford\External\Factory\LogginServiceFactory;
-use Predis\Client as RedisClient;
-use Psr\Log\LogLevel;
 
 class App
 {

@@ -20,7 +20,7 @@ class OxfordDictionaryAPI
 
     protected function prepateApiUrl(): string
     {
-        return $_ENV['OXFORD_APP_BASE_URL'] . '/' . $_ENV['OXFORD_APP_LANGUAGE'] . '/' . $_ENV['OXFORD_APP_SEARCH_WORD'];
+        return $_ENV['OXFORD_APP_BASE_URL'] . '/' . $_ENV['OXFORD_APP_LANGUAGE'] . '/' . $this->word;
     }
 
     public function index() : string
