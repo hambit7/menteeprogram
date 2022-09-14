@@ -10,12 +10,12 @@ class OxfordDictionaryAPI
 
     protected $clientService, $cacheService, $loggingService;
 
-    public function __construct($clientService, $cacheService, $loggingService)
+    public function __construct($clientService, $cacheService, $loggingService, $word)
     {
         $this->clientService = $clientService;
         $this->cacheService = $cacheService;
         $this->loggingService = $loggingService;
-        $this->word = $_ENV['OXFORD_APP_SEARCH_WORD'];
+        $this->word = $word;
     }
 
     protected function prepateApiUrl(): string
@@ -53,5 +53,4 @@ class OxfordDictionaryAPI
     {
         return $body->$method();
     }
-
 }
