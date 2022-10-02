@@ -2,12 +2,10 @@
 
 namespace App;
 
-use GuzzleHttp\Client;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 use Oxford\External\Container;
-use Predis\Client as RedisClient;
-use Psr\Log\LogLevel;
+use Oxford\External\Factory\CacheServiceFactory;
+use Oxford\External\Factory\ClientServiceFactory;
+use Oxford\External\Factory\LogginServiceFactory;
 
 class App
 {
@@ -22,30 +20,18 @@ class App
     {
         static::$container->set('ClientService',
             function () {
-                return new Client([
-                    'headers' => [
-                        'app_id' => $_ENV['OXFORD_APP_ID'],
-                        'app_key' => $_ENV['OXFORD_APP_KEY'],
-                    ]
-                ]);
+                return ClientServiceFactory::create();
             });
 
         static::$container->set('CacheService',
             function () {
-                return new RedisClient(
-                    [
-                        'scheme' => $_ENV['REDIS_SCHEME'],
-                        'host' => $_ENV['REDIS_HOST'],
-                        'port' => $_ENV['REDIS_PORT']
-                    ]);
+                return CacheServiceFactory::create();
             });
 
         static::$container->set('LoggingService',
             function () {
-                $log = new Logger($_ENV['LOG_NAME']);
-                $log->pushHandler(new StreamHandler($_ENV['LOG_FILE_NAME'], LogLevel::DEBUG));
-                return $log;
+                return LogginServiceFactory::create();
             });
-    }
 
+    }
 }

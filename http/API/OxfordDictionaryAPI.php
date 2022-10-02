@@ -10,17 +10,17 @@ class OxfordDictionaryAPI
 
     protected $clientService, $cacheService, $loggingService;
 
-    public function __construct($clientService, $cacheService, $loggingService)
+    public function __construct($clientService, $cacheService, $loggingService, $word)
     {
         $this->clientService = $clientService;
         $this->cacheService = $cacheService;
         $this->loggingService = $loggingService;
-        $this->word = $_ENV['OXFORD_APP_SEARCH_WORD'];
+        $this->word = $word;
     }
 
     protected function prepateApiUrl(): string
     {
-        return $_ENV['OXFORD_APP_BASE_URL'] . '/' . $_ENV['OXFORD_APP_LANGUAGE'] . '/' . $_ENV['OXFORD_APP_SEARCH_WORD'];
+        return $_ENV['OXFORD_APP_BASE_URL'] . '/' . $_ENV['OXFORD_APP_LANGUAGE'] . '/' . $this->word;
     }
 
     public function index() : string
@@ -53,5 +53,4 @@ class OxfordDictionaryAPI
     {
         return $body->$method();
     }
-
 }
