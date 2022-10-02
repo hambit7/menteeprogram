@@ -2,6 +2,7 @@ language: php
 sudo: required
 
 before_install:
+  - ls -l
   - cd http
 install:
   - composer self-update
