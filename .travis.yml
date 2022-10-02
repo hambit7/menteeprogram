@@ -1,9 +1,14 @@
 language: php
 sudo: required
 
+before_install:
+  - cd http
+
+before_script:
+  - cd http
 
 install:
-  - http/composer self-update
-  - http/composer-install --no-interaction
+  - composer self-update
+  - composer-install --no-interaction
 script:
-  - http/phpunit --configuration phpunit.xml
+  - phpunit --configuration phpunit.xml
