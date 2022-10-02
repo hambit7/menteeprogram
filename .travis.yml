@@ -1,4 +1,4 @@
-before_install: cd http
+before_script: cd http
 language: php
 install:
   - composer-install
