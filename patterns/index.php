@@ -24,7 +24,8 @@ $reportTotalWorkersCount = new TotalNumberOfEmployeesReport();
 $AvarageSallaryReport = new AvarageSallaryReport();
 $NumberOfEmployeeperDepartmentReport = new NumberOfEmployeeperDepartmentReport();
 
-echo  $reportSalary->visitCompany($company);
-echo  $reportTotalWorkersCount->visitCompany($company);
-echo  $AvarageSallaryReport->visitCompany($company);
-echo  $NumberOfEmployeeperDepartmentReport->visitCompany($company);
+echo $company->accept($reportSalary);
+echo $company->accept($reportTotalWorkersCount);
+echo $company->accept($AvarageSallaryReport);
+echo $company->accept($NumberOfEmployeeperDepartmentReport);
+

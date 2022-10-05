@@ -2,7 +2,7 @@
 
 namespace Patters\Visitor;
 
-class Company
+class Company  implements Entity
 {
     private string $name;
 
@@ -22,5 +22,10 @@ class Company
     public function getEmployees(): array
     {
         return $this->employees;
+    }
+
+    public function accept(Visitor $visitor): string
+    {
+        return $visitor->visitCompany($this);
     }
 }

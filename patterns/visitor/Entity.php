@@ -1,7 +1,7 @@
 <?php
 namespace Patters\Visitor;
 
-use Patters\Visitor;
+use Patters\Visitor\Visitor;
 
 interface Entity
 {
