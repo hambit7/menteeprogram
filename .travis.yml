@@ -1,5 +1,6 @@
 language: php
-
+php:
+  - =7.4.0
 before_script:
   - cd http
   - composer self-update
